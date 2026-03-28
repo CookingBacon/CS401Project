@@ -7,25 +7,27 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="game-container">
-        <h1>FlashMath</h1>
-        <div class="status-bar">
-            <span id="score">Score: 0</span>
-            <span id="lives">Lives: 3</span>
+    <div class="top-bar">
+        <div class="top-left">
             <span id="timer">Time: 60</span>
+            <span id="score">Score: 0</span>
+            <span id="lives">&#9829;&#9829;&#9829;</span>
         </div>
-
-        <div class="question-container">
-            <p id="question"></p>
-            <input type="number" id="answer" step="0.1" placeholder="Your answer" disabled>
-        </div>
-
-        <div class="buttons">
-            <button id="start-btn">Start Timer Mode</button>
-        </div>
-        <p id="feedback"></p>
-
     </div>
+
+    <div class="title">Fla<span class="bolt">&#9889;</span>hMath</div>
+
+    <div class="question-container">
+        <p id="question"></p>
+        <p id="feedback"></p>
+    </div>
+
+    <div class="bottom-bar">
+        <input type="number" id="answer" step="0.1" placeholder="?" disabled>
+        <button id="start-btn">Start</button>
+        <button id="pass-btn" disabled>Pass</button>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
