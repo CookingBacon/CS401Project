@@ -3,7 +3,6 @@ let lives = 3;
 let time = 60;
 let currentAnswer = 0;
 let timerInterval = null;
-
 // Elements, connecting script.js to index.html
 const questionElement = document.getElementById("question");
 const answerInput = document.getElementById("answer");
@@ -12,6 +11,11 @@ const livesEl = document.getElementById("lives");
 const timerEl = document.getElementById("timer");
 const feedbackEl = document.getElementById("feedback");
 const startBtn = document.getElementById("start-btn");
+const passBtn = document.getElementById("pass-btn");
+
+function updateHearts() {
+    livesEl.textContent = "♥".repeat(lives);
+}
 
 // Generate a random math question
 function generateQuestion() {
@@ -23,35 +27,37 @@ function generateQuestion() {
 
     if(op === "+") {
         currentAnswer = Math.floor(num1 + num2);
-        questionElement.textContent = `${num1} + ${num2} = ?`;
+        questionElement.textContent = `${num1} + ${num2}`;
     } else if(op === "-") {
         currentAnswer = num1 - num2;
-        questionElement.textContent = `${num1} - ${num2} = ?`;
+        questionElement.textContent = `${num1} - ${num2}`;
     } else if(op === "*") {
         currentAnswer = num1 * num2;
-        questionElement.textContent = `${num1} x ${num2} = ?`;
+        questionElement.textContent = `${num1} x ${num2}`;
     } else {
         const rawAnswer = num1 / num2;
-        currentAnswer = currentAnswer = Math.round(rawAnswer*10)/10;
-        questionElement.textContent = `${num1} / ${num2} = ?`;
+        currentAnswer = Math.round(rawAnswer * 10) / 10;
+        questionElement.textContent = `${num1} / ${num2}`;
     }
 }
 
 // Check the answer
 function checkAnswer() {
     //Reads the player's input
-    const userAnswer = parseInt(answerInput.value);
+    const userAnswer = parseFloat(answerInput.value);
     //Rounds the player's input to the tenth decimal for division questions
-    const roundedUser = Math.round(userAnswer * 10)/10;
+    const roundedUser = Math.round(userAnswer * 10) / 10;
 
     if(roundedUser === currentAnswer) {
         score++;
         scoreEl.textContent = `Score: ${score}`;
-        feedbackEl.textContent = "Correct!";
+        feedbackEl.textContent = "✓";
+        feedbackEl.className = "correct";
     } else {
         lives--;
-        livesEl.textContent = `Lives: ${lives}`;
-        feedbackEl.textContent = `Wrong! Answer: ${currentAnswer}`;
+        updateHearts();
+        feedbackEl.textContent = `✗ ${currentAnswer}`;
+        feedbackEl.className = "wrong";
     }
     //Reset player input field
     answerInput.value = "";
@@ -70,11 +76,14 @@ function startGame() {
     lives = 3;
     time = 60;
     scoreEl.textContent = `Score: ${score}`;
-    livesEl.textContent = `Lives: ${lives}`;
+    updateHearts();
     timerEl.textContent = `Time: ${time}`;
+    timerEl.classList.remove("urgent");
     feedbackEl.textContent = "";
+    feedbackEl.className = "";
     generateQuestion();
     answerInput.disabled = false;
+    passBtn.disabled = false;
     answerInput.focus();
 
     //Prevents timer from a previous game, overlapping into a new game
@@ -83,6 +92,9 @@ function startGame() {
     timerInterval = setInterval(() => {
         time--;
         timerEl.textContent = `Time: ${time}`;
+        if(time <= 10) {
+            timerEl.classList.add("urgent");
+        }
         if(time <= 0) {
             endGame();
         }
@@ -95,9 +107,11 @@ function endGame() {
     //Resets the timer
     clearInterval(timerInterval);
     questionElement.textContent = `Game Over! Final Score: ${score}`;
-    //Resets player text field 
+    //Resets player text field
     feedbackEl.textContent = "";
+    feedbackEl.className = "";
     answerInput.disabled = true;
+    passBtn.disabled = true;
 }
 
 //If player presses Enter, check answer
@@ -106,6 +120,21 @@ answerInput.addEventListener("keydown", (e) => {
         checkAnswer();
     }
 });
+
+//Pass skips to next question and costs a life
+passBtn.addEventListener("click", () => {
+    lives--;
+    updateHearts();
+    feedbackEl.textContent = `✗ ${currentAnswer}`;
+    feedbackEl.className = "wrong";
+    answerInput.value = "";
+    if(lives <= 0) {
+        endGame();
+    } else {
+        generateQuestion();
+    }
+});
+
 
 //Start game on button click
 startBtn.addEventListener("click", startGame);
