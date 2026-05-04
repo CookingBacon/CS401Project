@@ -274,12 +274,12 @@ body {
     background: rgba(255,255,255,0.06);
     border: 1px solid rgba(255,255,255,0.11);
     border-radius: 16px;
-    padding: 12px 18px;
+    padding: 16px 22px;
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     flex-shrink: 0;
 }
-.hud-cell { font-size: 1.05em; font-weight: 700; }
+.hud-cell { font-size: 1.3em; font-weight: 700; }
 #timer { color: #38bdf8; }
 #timer.urgent { color: #ef4444; animation: blink 0.5s infinite; }
 @keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0.35; } }
@@ -354,6 +354,24 @@ body {
 }
 .feedback.pop-anim   { animation: popAnim   0.4s ease; }
 .feedback.shake-anim { animation: shakeAnim 0.4s ease; }
+
+/* fixed quit button */
+.btn-quit {
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    background: rgba(239,68,68,0.13);
+    border: 1px solid rgba(239,68,68,0.25);
+    color: #fca5a5;
+    font-size: 1em;
+    font-weight: 600;
+    padding: 13px 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    z-index: 100;
+    transition: background 0.15s, border-color 0.15s;
+}
+.btn-quit:hover { background: rgba(239,68,68,0.22); border-color: rgba(239,68,68,0.55); }
 
 /* controls */
 .controls {

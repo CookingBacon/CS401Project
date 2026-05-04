@@ -1,2 +1,3 @@
 # CS401Project
 CS401 Group 2
+Flashmath is a single-player 2D educational game designed around quick rounds of math practice. Players are presented with one math question at a time of addition, subtraction, multiplication and division. Players must input the correct answer to earn points. The game tracks score, time and remaining lives to provide challenge and replay ability. Users must answer as many math questions as possible correctly within a time limit. The game is intended to be intuitive, quick and replayable. A game created for short practice sessions and to enhance quick-thinking math skills.

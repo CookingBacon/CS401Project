@@ -55,6 +55,7 @@ const feedbackEl = document.getElementById('feedback');
 const answerInput = document.getElementById('answer');
 const submitBtn = document.getElementById('submit-btn');
 const passBtn = document.getElementById('pass-btn');
+const quitBtn = document.getElementById('quit-btn');
 
 const finalScoreEl = document.getElementById('final-score');
 const endHighScoreEl = document.getElementById('end-high-score');
@@ -261,6 +262,7 @@ function startGame() {
     timerInterval = setInterval(tick, 1000);
 
     show(gameScreen);
+    quitBtn.style.display = 'block';
     nextQuestion();
     setTimeout(() => answerInput.focus(), 80);
     playBeep('start');
@@ -307,6 +309,7 @@ function endGame() {
     answerInput.disabled = true;
     submitBtn.disabled = true;
     passBtn.disabled = true;
+    quitBtn.style.display = 'none';
 
     const isNew = score > highScore;
     if (isNew) highScore = score;
@@ -325,6 +328,10 @@ function endGame() {
 
 // button listeners
 playBtn.addEventListener('click', startGame);
+
+quitBtn.addEventListener('click', () => {
+    endGame();
+});
 
 settingsBtn.addEventListener('click', () => {
     refreshSettingsUI();

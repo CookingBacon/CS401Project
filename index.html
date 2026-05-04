@@ -87,7 +87,7 @@
 
     <!-- game page -->
     <div id="game-screen" class="screen">
-        <!-- displays timer and score at the top -->
+        <!-- displays timer/score at the top -->
         <div class="hud">
             <div class="hud-cell" id="timer">⏱ 1:00</div>
             <div class="hud-cell hud-score" id="score">Score: 0</div>
@@ -128,6 +128,9 @@
             </div>
         </div>
     </div>
+
+    <!-- outside all screens to keep fixed positioning -->
+    <button class="btn-quit" id="quit-btn" style="display:none">✕ Quit</button>
 
     <script src="script.js"></script>
 </body>
