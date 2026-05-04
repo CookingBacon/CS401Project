@@ -7,25 +7,126 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="top-bar">
-        <div class="top-left">
-            <span id="timer">Time: 60</span>
-            <span id="score">Score: 0</span>
-            <span id="lives">&#9829;&#9829;&#9829;</span>
+
+    <!-- home page -->
+    <div id="home-screen" class="screen active">
+        <div class="card">
+            <div class="logo">Fla<span class="bolt">⚡</span>hMath</div>
+            <p class="tagline">Think fast, calculate faster.</p>
+            <div class="highscore-banner">
+                <span class="trophy">🏆</span>
+                <div>
+                    <div class="hs-label">High Score</div>
+                    <div class="hs-value" id="home-high-score">0</div>
+                </div>
+            </div>
+            <div class="recent-block">
+                <div class="block-label">Recent Scores</div>
+                <div id="score-history"></div>
+            </div>
+            <div class="btn-stack">
+                <button class="btn btn-primary" id="play-btn">▶ Play</button>
+                <button class="btn btn-outline" id="settings-btn">⚙ Settings</button>
+            </div>
         </div>
     </div>
 
-    <div class="title">Fla<span class="bolt">&#9889;</span>hMath</div>
+    <!-- settings page -->
+    <div id="settings-screen" class="screen">
+        <div class="card">
+            <div class="screen-title">⚙ Settings</div>
 
-    <div class="question-container">
-        <p id="question"></p>
-        <p id="feedback"></p>
+            <div class="setting-group">
+                <div class="block-label">Difficulty</div>
+                <div class="pill-row" id="diff-group">
+                    <button class="pill" data-diff="easy">Easy</button>
+                    <button class="pill pill-active" data-diff="normal">Normal</button>
+                    <button class="pill" data-diff="hard">Hard</button>
+                    <button class="pill" data-diff="custom">Custom</button>
+                </div>
+            </div>
+
+            <!-- only shows when custom difficulty is selected -->
+            <div id="custom-fields">
+                <div class="block-label">Custom Options</div>
+                <div class="field-row">
+                    <label>Time Limit (seconds)</label>
+                    <input type="number" id="custom-time" min="10" max="300" value="60">
+                </div>
+                <div class="field-row">
+                    <label>Lives (max wrong)</label>
+                    <input type="number" id="custom-lives" min="1" max="10" value="3">
+                </div>
+            </div>
+
+            <div class="setting-group">
+                <div class="block-label">Operations</div>
+                <div class="ops-grid">
+                    <label class="op-label" id="lbl-add">
+                        <input type="checkbox" id="op-add" checked>
+                        <span>+ Addition</span>
+                    </label>
+                    <label class="op-label" id="lbl-sub">
+                        <input type="checkbox" id="op-sub" checked>
+                        <span>− Subtraction</span>
+                    </label>
+                    <label class="op-label" id="lbl-mul">
+                        <input type="checkbox" id="op-mul" checked>
+                        <span>× Multiplication</span>
+                    </label>
+                    <label class="op-label" id="lbl-div">
+                        <input type="checkbox" id="op-div" checked>
+                        <span>÷ Division</span>
+                    </label>
+                </div>
+            </div>
+
+            <button class="btn btn-primary" id="back-btn">← Save & Back</button>
+        </div>
     </div>
 
-    <div class="bottom-bar">
-        <input type="number" id="answer" step="0.1" placeholder="?" disabled>
-        <button id="start-btn">Start</button>
-        <button id="pass-btn" disabled>Pass</button>
+    <!-- game page -->
+    <div id="game-screen" class="screen">
+        <!-- displays timer and score at the top -->
+        <div class="hud">
+            <div class="hud-cell" id="timer">⏱ 1:00</div>
+            <div class="hud-cell hud-score" id="score">Score: 0</div>
+            <div class="hud-cell hud-lives" id="lives">♥♥♥</div>
+        </div>
+        <div class="game-body">
+            <div class="question-wrap">
+                <div class="question" id="question"></div>
+                <div class="feedback" id="feedback"></div>
+            </div>
+            <!-- answer input and buttons -->
+            <div class="controls">
+                <input class="answer-input" type="number" id="answer" step="0.1" placeholder="?" disabled>
+                <button class="btn btn-submit" id="submit-btn" disabled>✓</button>
+                <button class="btn btn-pass" id="pass-btn" disabled>Pass</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- results page -->
+    <div id="end-screen" class="screen">
+        <div class="card end-card">
+            <div class="end-heading">Game Over</div>
+            <div class="end-scores">
+                <div class="esb">
+                    <div class="esb-label">Your Score</div>
+                    <div class="esb-value" id="final-score">0</div>
+                </div>
+                <div class="esb">
+                    <div class="esb-label">🏆 Best</div>
+                    <div class="esb-value" id="end-high-score">0</div>
+                </div>
+            </div>
+            <div class="new-record" id="new-record">🎉 New High Score!</div>
+            <div class="btn-stack">
+                <button class="btn btn-primary" id="replay-btn">🔄 Play Again</button>
+                <button class="btn btn-outline" id="menu-btn">🏠 Main Menu</button>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>
